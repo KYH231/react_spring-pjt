@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="react_spring_ptj.react_spring_pjt.bbs.dao.BbsMapper">
+
+
+    <!-- findAll --> 
+
+    <select id="findAllRow" resultType ="react_spring_ptj.react_spring_pjt.bbs.domain.BbsResponseDTO">
+        SELECT ID, TITLE, CONTENT
+        FROM tb_bbs
+    </select>
+
+    <!-- saveRow --> 
+
+    <insert id="saveRow" parameterType="react_spring_ptj.react_spring_pjt.bbs.domain.BbsRequstDTO">
+        INSERT INTO TB_BBS(TITLE, CONTENT)
+        VALUES(#{title}, #{content})
+    </insert>
+
+    <!-- getRow --> 
+
+    <select id="findRow" parameterType="java.util.HashMap" resultType="react_spring_ptj.react_spring_pjt.bbs.domain.BbsResponseDTO">
+        SELECT ID, TITLE, CONTENT
+        FROM TB_BBS
+        WHERE ID= #{id}
+    </select>
+
+    <!-- commentSelectRow --> 
+
+    <select id="commentSelectRow" parameterType="java.util.HashMap" resultType="react_spring_ptj.react_spring_pjt.bbs.domain.comment.CommentResponseDTO">
+        SELECT ID, CONTENT, BBSID
+        FROM   TB_comment
+        WHERE BBSID = #{id};
+    </select>
+
+    <!-- saveComment --> 
+
+    <insert id="saveCommentRow" parameterType="react_spring_ptj.react_spring_pjt.bbs.domain.comment.CommentRequestDTO">
+        INSERT INTO tb_comment (bbsid, content)
+        VALUES (#{bbsid}, #{content})
+    </insert>
+
+</mapper>
